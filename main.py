@@ -438,14 +438,12 @@ def main():
     print("#" + " "*68 + "#")
     print("#"*70)
     
-    # Set random seed for reproducibility
-    np.random.seed(42)
-    
     # Configuration
     N_SIMULATIONS = 100000
     N_COUNTERPARTIES = 100
     CORRELATION = 0.3  # Asset correlation
     T_DF = 4  # Degrees of freedom for t-copula
+    RANDOM_SEED = 42  # Seed passed to individual components for reproducibility
     
     # Create results directory
     results_dir = create_results_directory()
@@ -455,14 +453,14 @@ def main():
     print("\n" + "="*60)
     print("STEP 1: PORTFOLIO CREATION")
     print("="*60)
-    portfolio = CreditPortfolio(n_counterparties=N_COUNTERPARTIES, seed=42)
+    portfolio = CreditPortfolio(n_counterparties=N_COUNTERPARTIES, seed=RANDOM_SEED)
     portfolio_df = analyze_portfolio(portfolio, results_dir)
     
     # Step 2: Define copulas for comparison
     copulas = {
-        'Gaussian': GaussianCopula(correlation=CORRELATION, seed=42),
-        't-Copula': TCopula(correlation=CORRELATION, df=T_DF, seed=43),
-        'Factor': FactorCopula(asset_correlation=CORRELATION, seed=44)
+        'Gaussian': GaussianCopula(correlation=CORRELATION, seed=RANDOM_SEED),
+        't-Copula': TCopula(correlation=CORRELATION, df=T_DF, seed=RANDOM_SEED + 1),
+        'Factor': FactorCopula(asset_correlation=CORRELATION, seed=RANDOM_SEED + 2)
     }
     
     # Step 3: Run Monte Carlo simulations for each copula
@@ -490,7 +488,7 @@ def main():
     print("Created: tail_comparison.png")
     
     # Step 5: Run stress tests
-    run_stress_tests(portfolio, GaussianCopula(correlation=CORRELATION, seed=45),
+    run_stress_tests(portfolio, GaussianCopula(correlation=CORRELATION, seed=RANDOM_SEED + 3),
                      N_SIMULATIONS, results_dir)
     print("Created: stress_test_results.png")
     

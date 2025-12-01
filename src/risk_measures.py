@@ -65,8 +65,8 @@ class VaRCalculator:
             VaR at the specified confidence level
         """
         t_score = stats.t.ppf(confidence_level, df)
-        # Adjust for t-distribution scaling
-        scale = std * np.sqrt((df - 2) / df) if df > 2 else std
+        # Adjust for t-distribution scaling (variance = df/(df-2) for df > 2)
+        scale = std * np.sqrt(df / (df - 2)) if df > 2 else std
         return mean + t_score * scale
     
     @staticmethod

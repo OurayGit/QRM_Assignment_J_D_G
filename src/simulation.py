@@ -10,6 +10,7 @@ from scipy import stats
 
 from .portfolio import CreditPortfolio
 from .copulas import Copula, GaussianCopula
+from .risk_measures import calculate_risk_measures
 
 
 class MonteCarloSimulator:
@@ -248,8 +249,6 @@ def compare_copulas(portfolio: CreditPortfolio, copulas: list,
     Returns:
         Dictionary with comparison results
     """
-    from .risk_measures import calculate_risk_measures
-    
     results = {}
     
     for copula in copulas:

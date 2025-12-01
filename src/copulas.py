@@ -238,7 +238,7 @@ def compute_tail_dependence(copula: Copula, n_simulations: int = 100000) -> Tupl
         # Lower tail: P(U2 <= q | U1 <= q)
         mask_lower = U[:, 0] <= q
         if mask_lower.sum() > 0:
-            lower_deps.append(np.mean(U[mask_lower, 1] <= q) * q / q)
+            lower_deps.append(np.mean(U[mask_lower, 1] <= q))
         
         # Upper tail: P(U2 > 1-q | U1 > 1-q)
         mask_upper = U[:, 0] > (1 - q)
