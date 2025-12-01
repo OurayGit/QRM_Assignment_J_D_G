@@ -1,2 +1,5 @@
-# QRM_Assignment_J_D_G
-The goal of the assignment is to apply theoretical results on copulas and risk measures to assess the risk of a simple investment portfolio.
+# QRM_Assignment_Davide_Jasper_Gian
+The goal of this assignment is to estimate value-at-risk (VaR) and expected shortfall (ES)
+for the profit and loss distribution of a given credit portfolio. The portfolio consists of 100
+counterparties, representing corporate bonds of firms with operations in Switzerland and
+the United States.
