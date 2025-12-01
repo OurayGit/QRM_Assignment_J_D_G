@@ -8,10 +8,17 @@ library(tidyr) # for data reshaping
 library(MASS) # for mvrnorm
 library(patchwork)  # for arranging plots
 library(scales) # for comma formatting
+library(here) # for loading the data
 
 #--------------Load Data----------
-creditportfolio <- read_excel("~/Documents/Uni/HSG/HS25/QRM/qrm25HSG_assignmentdata/qrm25HSG_creditportfolio.xlsx")
-indexes <- read_excel("~/Documents/Uni/HSG/HS25/QRM/qrm25HSG_assignmentdata/qrm25HSG_indexes.xlsx", na = "#N/A N/A", skip = 1)
+creditportfolio <- read_excel(here("qrm25HSG_creditportfolio.xlsx"))
+
+indexes <- read_excel(
+  here("qrm25HSG_indexes.xlsx"),
+  na = "#N/A N/A",
+  skip = 1
+)
+
 indexes <- indexes[, c(1, 2, 4)]  # Date, SPI, SPX
 colnames(indexes) <- c("Date", "SPI", "SPX")
 
